@@ -27,6 +27,7 @@ bool Model::gameOver() {
 }
 
 // keep score (figure out if the letter is in the string
-void Model::type(unsigned int time, char letter) {
+void Model::type(char letter) {
 	
 }
+
