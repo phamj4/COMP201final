@@ -1,4 +1,4 @@
-#include "view.h"
+#include "view.h"	
 
 using namespace std;
 
@@ -34,7 +34,12 @@ View::View(string title, int width, int height) {
 		return;
 	}
 	// Load assets
-	stand = load("assets/stand.jpg");
+	Stand = load("assets/Stand.jpg");
+	StandBody = load("assets/Standbody.jpg");
+	StandLeftArm = load("assets/StandLeftArm.jpg");
+	StandRightArm = load("assets/StandRightArm.jpg");
+	StandLeftLeg = load("assets/StandLeftLeg.jpg");
+	StandRightLeg = load("assets/StandRightLeg.jpg");
 	//    music = Mix_LoadMUS("assets/2Inventions_-_Johaness_Gilther_-_Don_t_leave_me.mp3");
 	//    if (music != NULL) {
 	//       Mix_PlayMusic( music, -1 );
@@ -72,13 +77,47 @@ SDL_Surface* View::load(char * path) {
 void View::show(Model * model) {
 
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,
-		0x00, 0x00, 0x00));
+		0xff, 0xff, 0xff));
 
 	SDL_Rect dest;
-	dest.x = 20;
-	dest.y = 20;
+	dest.x = 30;
+	dest.y = 30;
 
-	SDL_BlitSurface(stand, NULL, screen, &dest);
+	SDL_Rect dest2;
+	dest2.x = 30;
+	dest2.y = 30;
+
+	SDL_Rect dest3;
+	dest3.x = 30;
+	dest3.y = 30;
+	
+	SDL_Rect dest4;
+	dest4.x = 30;
+	dest4.y = 30;
+
+	SDL_Rect dest5;
+	dest5.x = 30;
+	dest5.y = 30;
+
+	SDL_Rect dest6;
+	dest6.x = 30;
+	dest6.y = 30;
+
+	SDL_SetColorKey(Stand, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
+	SDL_BlitSurface(Stand, NULL, screen, &dest);
+	SDL_SetColorKey(StandBody, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
+	SDL_BlitSurface(StandBody, NULL, screen, &dest2);
+	SDL_SetColorKey(StandLeftArm, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
+	SDL_BlitSurface(StandLeftArm, NULL, screen, &dest3);
+	SDL_SetColorKey(StandRightArm, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
+	SDL_BlitSurface(StandRightArm, NULL, screen, &dest4);
+	SDL_SetColorKey(StandLeftLeg, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
+	SDL_BlitSurface(StandLeftLeg, NULL, screen, &dest5);
+	SDL_SetColorKey(StandRightLeg, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
+	SDL_BlitSurface(StandRightLeg, NULL, screen, &dest6);
+	
+
+
 	// Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
 
 	SDL_UpdateWindowSurface(window);

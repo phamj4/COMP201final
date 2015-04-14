@@ -23,7 +23,12 @@ private:
     SDL_Surface* screen;
     bool fail;
     SDL_Surface* load(char * path);
-	SDL_Surface* stand;
+	SDL_Surface* Stand;
+	SDL_Surface* StandBody;
+	SDL_Surface* StandLeftArm;
+	SDL_Surface* StandRightArm;
+	SDL_Surface* StandLeftLeg;
+	SDL_Surface* StandRightLeg;
 //    SDL_Surface* text;
 //    Mix_Music * music;
 //    Mix_Chunk * food;

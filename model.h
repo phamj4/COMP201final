@@ -17,6 +17,7 @@ public:
     bool gameOver();
     // TODO: Put your stuff here
 	void type(char letter);
+private:
 	char lastGuess;
 	// The secret word
 	std::string secret;
