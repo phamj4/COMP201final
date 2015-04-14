@@ -1,6 +1,8 @@
 #ifndef _MODEL_H
 #define _MODEL_H
 
+#include <string>
+
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
 // The model manages the state of the game
@@ -13,6 +15,12 @@ public:
     // Is the game over?
     bool gameOver();
     // TODO: Put your stuff here
+	void type(unsigned int time, char letter);
+private:
+	std::string secret;
+	std::string visible;
+	int guesses;
+	int wrongGuesses;
 };
 
 #endif
