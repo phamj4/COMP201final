@@ -23,11 +23,22 @@ Model::~Model() {
 }
 
 bool Model::gameOver() {
-    return false;
+	int wrongGuesses = 6;
+	
+	Model::visible();
+	if
+	{
+		Model::visible() = wrongGuesses;
+	}
+    
 }
 
 // keep score (figure out if the letter is in the string
-void Model::type(char letter) {
+bool Model::match(char letter) {
+	return (secret.find(lastguess) != string:npos)
+}
+
+void Model::playGuess(char letter){
 	
 }
 
@@ -88,6 +99,7 @@ bool Model::visible(){
 			StandLeftArm.visible = true;
 			StandRightArm.visible = true;
 			StandLeftLeg.visible = true;
+			return playerWrongGuesses;
 		}
 	}
 	
