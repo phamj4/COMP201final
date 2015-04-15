@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-enum Direction { UP, DOWN, LEFT, RIGHT };
+enum State { NEW_GAME, PLAY };
 
 // The model manages the state of the game
 class Model {
@@ -15,12 +15,14 @@ public:
     ~Model();
     // Is the game over?
     bool gameOver();
+
+
     // TODO: Put your stuff here
 	void type(char letter);
-	int playerWrongGuesses = 0;
-	int playerGuesses = 0;
+	std::int playerWrongGuesses = 0;
+	std::int playerGuesses = 0;
 private:
-	char lastGuess;
+	std::char lastGuess;
 	// The secret word
 	std::string secret;
 	// What the user sees
@@ -30,7 +32,7 @@ private:
 	// The dictionary
 	std::vector<std::string> wordList;
 	// How many wrong guesses have been made
-	int wrongGuesses =6;
+	std::int wrongGuesses =6;
 };
 
 #endif
