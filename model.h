@@ -17,6 +17,8 @@ public:
     bool gameOver();
     // TODO: Put your stuff here
 	void type(char letter);
+	int playerWrongGuesses = 0;
+	int playerGuesses = 0;
 private:
 	char lastGuess;
 	// The secret word
@@ -28,7 +30,7 @@ private:
 	// The dictionary
 	std::vector<std::string> wordList;
 	// How many wrong guesses have been made
-	int wrongGuesses;
+	int wrongGuesses =6;
 };
 
 #endif
