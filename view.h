@@ -25,7 +25,7 @@ private:
 	bool fail;
 	SDL_Surface* load(char * path);
 	SDL_Surface* Stand;
-	SDL_Surface* hangman[6];
+	SDL_Surface* hangman[7];
     SDL_Surface* text;
 	//    Mix_Music * music;
 	//    Mix_Chunk * food;
