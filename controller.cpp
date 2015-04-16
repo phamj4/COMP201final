@@ -1,8 +1,9 @@
 #include "controller.h"
 #include <map>
+#include <iostream>
+
 
 using namespace std;
-
 Controller::Controller() {
 	model = new Model();
 	view = new View("Game", 1024, 768);
