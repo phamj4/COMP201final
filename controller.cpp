@@ -52,15 +52,13 @@ void Controller::loop() {
 	letter[SDLK_RETURN] = '\r';
 
 	while (!model->gameOver()) {
-		currentTime = SDL_GetTicks();
-
 		view->show(model);
 		if (SDL_PollEvent(&e) != 0) {
 			switch (e.type) {
 			case SDL_QUIT:
 				return;
 			case SDL_KEYDOWN:
-				model->type(currentTime, letter[e.key.keysym.sym]);
+				model->type(letter[e.key.keysym.sym]);
 				break;
 			}
 		}

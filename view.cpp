@@ -1,4 +1,4 @@
-#include "view.h"	
+#include "view.h"
 
 using namespace std;
 
@@ -23,33 +23,27 @@ View::View(string title, int width, int height) {
 		fail = true;
 		return;
 	}
-	//Initialize SDL_mixer
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-		fail = true;
-		return;
-	}
-
-	// Initialize True type fonts
-	if (TTF_Init() == -1) {
-		return;
-	}
+    // Initialize True type fonts
+    if( TTF_Init() == -1 ) {
+        return;
+    }
 	// Load assets
-	Stand = load("assets/Stand.jpg");
-	StandBody = load("assets/Standbody.jpg");
-	StandLeftArm = load("assets/StandLeftArm.jpg");
-	StandRightArm = load("assets/StandRightArm.jpg");
-	StandLeftLeg = load("assets/StandLeftLeg.jpg");
-	StandRightLeg = load("assets/StandRightLeg.jpg");
-	//    music = Mix_LoadMUS("assets/2Inventions_-_Johaness_Gilther_-_Don_t_leave_me.mp3");
-	//    if (music != NULL) {
-	//       Mix_PlayMusic( music, -1 );
-	//    }
-	//    food = Mix_LoadWAV("assets/yummy.wav");
-	font = TTF_OpenFont("assets/LiberationSans-Regular.ttf", 28);
-
+	hangman[0] = load("assets/Stand.jpg");
+	hangman[1] = load("assets/StandHead.jpg");
+	hangman[2] = load("assets/StandBody.jpg");
+	hangman[3] = load("assets/StandLeftArm.jpg");
+	hangman[4] = load("assets/StandRightArm.jpg");
+	hangman[5] = load("assets/StandLeftLeg.jpg");
+	hangman[6] = load("assets/StandRightLeg.jpg");
+    font = TTF_OpenFont( "assets/LiberationSans-Regular.ttf", 28 );
 }
 
 View::~View() {
+    TTF_CloseFont( font );
+    TTF_Quit();
+	for (int i = 0; i < 7; i++) {
+		SDL_FreeSurface(hangman[i]);
+	}
 	SDL_DestroyWindow(window);
 	IMG_Quit();
 	SDL_Quit();
@@ -74,51 +68,46 @@ SDL_Surface* View::load(char * path) {
 	return optimizedSurface;
 }
 
+void View::showText(string text, int x, int y) {
+	SDL_Color textColor = { 0, 0, 0 };
+    this->text = TTF_RenderText_Solid( font, text.c_str(), textColor );
+	SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    SDL_BlitSurface( this->text, NULL, screen, &dest );
+	SDL_FreeSurface(this->text);
+}
+
 void View::show(Model * model) {
 
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,
 		0xff, 0xff, 0xff));
 
 	SDL_Rect dest;
-	dest.x = 30;
-	dest.y = 30;
+	dest.x = 0;
+	dest.y = 0;
 
-	SDL_Rect dest2;
-	dest2.x = 30;
-	dest2.y = 30;
-
-	SDL_Rect dest3;
-	dest3.x = 30;
-	dest3.y = 30;
+	SDL_BlitSurface( hangman[model->hangmanProgress()], NULL, screen, &dest );
 	
-	SDL_Rect dest4;
-	dest4.x = 30;
-	dest4.y = 30;
-
-	SDL_Rect dest5;
-	dest5.x = 30;
-	dest5.y = 30;
-
-	SDL_Rect dest6;
-	dest6.x = 30;
-	dest6.y = 30;
-
-	SDL_SetColorKey(Stand, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
-	SDL_BlitSurface(Stand, NULL, screen, &dest);
-	SDL_SetColorKey(StandBody, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
-	SDL_BlitSurface(StandBody, NULL, screen, &dest2);
-	SDL_SetColorKey(StandLeftArm, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
-	SDL_BlitSurface(StandLeftArm, NULL, screen, &dest3);
-	SDL_SetColorKey(StandRightArm, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
-	SDL_BlitSurface(StandRightArm, NULL, screen, &dest4);
-	SDL_SetColorKey(StandLeftLeg, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
-	SDL_BlitSurface(StandLeftLeg, NULL, screen, &dest5);
-	SDL_SetColorKey(StandRightLeg, SDL_TRUE, SDL_MapRGB(screen->format, 0xff, 0xff, 0xff));
-	SDL_BlitSurface(StandRightLeg, NULL, screen, &dest6);
-	
-
-
-	// Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
+	showText(model->getVisible(), 100, 500);
+	showText("You used: " + model->getUsed(), 100, 600);
 
 	SDL_UpdateWindowSurface(window);
 }
+
+/*
+// Show the model, one cell at a time
+void View::show(Model * model) {
+for (int j = 0; j < model->getWidth(); j++) {
+cout << "\t" << j;
+}
+cout << endl;
+for (int i = 0; i < model->getHeight(); i++) {
+cout << i;
+for (int j = 0; j < model->getWidth(); j++) {
+cout << "\t" << model->get(i, j);
+}
+cout << endl;
+}
+}
+*/

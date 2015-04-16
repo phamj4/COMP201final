@@ -14,24 +14,21 @@
 // Show (output) the state of the model
 class View {
 public:
-    View(std::string title, int width, int height);
-    ~View();
-    // Print out the visible stuff in the grid
-    void show(Model * model);
+	View(std::string title, int width, int height);
+	~View();
+	// Print out the visible stuff in the grid
+	void show(Model * model);
 private:
-    SDL_Window* window;
-    SDL_Surface* screen;
-    bool fail;
-    SDL_Surface* load(char * path);
+	void showText(std::string text, int x, int y);
+	SDL_Window* window;
+	SDL_Surface* screen;
+	bool fail;
+	SDL_Surface* load(char * path);
 	SDL_Surface* Stand;
-	SDL_Surface* StandBody;
-	SDL_Surface* StandLeftArm;
-	SDL_Surface* StandRightArm;
-	SDL_Surface* StandLeftLeg;
-	SDL_Surface* StandRightLeg;
-//    SDL_Surface* text;
-//    Mix_Music * music;
-//    Mix_Chunk * food;
-    TTF_Font * font;
+	SDL_Surface* hangman[6];
+    SDL_Surface* text;
+	//    Mix_Music * music;
+	//    Mix_Chunk * food;
+	TTF_Font * font;
 };
-#endif
+#endif	
