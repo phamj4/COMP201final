@@ -1,4 +1,4 @@
-
+ 
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -26,7 +26,9 @@ private:
 	SDL_Surface* load(char * path);
 	SDL_Surface* Stand;
 	SDL_Surface* hangman[7];
-    SDL_Surface* text;
+    SDL_Surface* text; 
+	SDL_Surface* YouWin;
+	SDL_Surface* YouLose;
 	//    Mix_Music * music;
 	//    Mix_Chunk * food;
 	TTF_Font * font;
