@@ -28,6 +28,8 @@ View::View(string title, int width, int height) {
         return;
     }
 	// Load assets
+	YouWin = load("assets/win.jpg");
+	YouLose = load("assets/lose.jpg");
 	hangman[0] = load("assets/Stand.jpg");
 	hangman[1] = load("assets/StandHead.jpg");
 	hangman[2] = load("assets/StandBody.jpg");
@@ -92,6 +94,18 @@ void View::show(Model * model) {
 	showText(model->getVisible(), 100, 500);
 	showText("You used: " + model->getUsed(), 100, 600);
 
+	if (model->won()) 
+	{
+	SDL_BlitSurface( YouWin, NULL, screen, NULL ); 
+	SDL_UpdateWindowSurface(window);
+	SDL_Delay(500); 
+	}
+	 if (model->lost()) 
+	 {
+	SDL_BlitSurface( YouLose, NULL, screen, NULL); 
+	SDL_UpdateWindowSurface(window);
+	SDL_Delay(500); 
+	 } 
 	SDL_UpdateWindowSurface(window);
 }
 
